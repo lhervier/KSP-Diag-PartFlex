@@ -1,0 +1,6 @@
+Output/
+obj/
+GameData/KSPDiagPartFlex/*.dll
+GameData/**/*.zip
+CLAUDE.md
+__pycache__/
