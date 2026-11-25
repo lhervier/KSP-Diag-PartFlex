@@ -14,21 +14,9 @@ namespace com.github.lhervier.ksp.diag.partflex
     internal static class McpTools
     {
         [McpTool("partflex_read",
-            "Reads what the window of KSP Diag - Part Flex shows, without writing anything: the active vessel " +
-                "(vessel, empty when there is none) and whether it is on rails (onRails), the display mode, the " +
-                "arrow scale (arrowScale, the arrows are that many times the stretch), the bend scale (bendScale, " +
-                "the coloured axes are turned by that many times the bend), the stretch in mm and the bend in " +
-                "degrees from which an attachment is drawn (minStretchMm, minBendDeg), whether the values are " +
-                "frozen, how many attachments are measured (measured), and the attachments drawn, or every one " +
-                "measured when all is true, largest stretch first (attachments): the title, part name and flight " +
-                "id of the part (part, partName, partId) and the title and flight id of its parent (parent, " +
-                "parentId), whether it is drawn, how far the attachment point is from where the joint holds it " +
-                "at rest in mm (stretchMm) and the angle the part is turned by from its rest pose in degrees " +
-                "(bendDeg), the same against the poses of the save (saveStretchMm, saveBendDeg), how far apart " +
-                "the anchors of the joint were when its rest pose was taken in mm (restGapMm, 0 when taken " +
-                "before the physics moved anything) and whether the vessel was on rails then (restOnRails), and " +
-                "how far the anchor of the joint is from the node that joins the two parts in mm " +
-                "(anchorFromNodeMm: the stretch is measured at the node, at the anchor when there is none).")]
+            "Reads what the window of KSP Diag - Part Flex shows: vessel, onRails, display, scales, thresholds, " +
+            "frozen, and the attachments drawn (all: every one measured), largest stretch first: part and parent, " +
+            "stretchMm and bendDeg from the joint's rest, the same against the save, restGapMm, anchorFromNodeMm.")]
         internal static object Read(bool all = false)
         {
             return Mod().Read(all);
@@ -62,10 +50,8 @@ namespace com.github.lhervier.ksp.diag.partflex
         }
 
         [McpTool("partflex_set_thresholds",
-            "Chooses from which stretch, in mm, and which bend, in degrees, KSP Diag - Part Flex draws and lists an " +
-            "attachment, as the rows Stretch from and Bend from of its window do, but taking any value from 0. " +
-            "An attachment is drawn when either reaches its threshold; its arrow only when the stretch does, its " +
-            "axes only when the bend does. Returns the thresholds now chosen (minStretchMm, minBendDeg).")]
+            "Sets the stretch (mm) and bend (degrees) from which KSP Diag - Part Flex draws an attachment, as its " +
+            "Stretch from and Bend from rows do, any value from 0. Returns minStretchMm and minBendDeg.")]
         internal static object SetThresholds(double stretchMm, double bendDeg)
         {
             Mod().ChooseThresholds((float)stretchMm, (float)bendDeg);
@@ -77,10 +63,8 @@ namespace com.github.lhervier.ksp.diag.partflex
         }
 
         [McpTool("partflex_freeze",
-            "Freezes the values of KSP Diag - Part Flex, as ticking the box Freeze the values of its window does, " +
-            "or lets them follow the physics again. Frozen, nothing is measured and the drawing stays as last " +
-            "measured, following the vessel; the scales and thresholds still apply to it. Returns whether the " +
-            "values are frozen (frozen).")]
+            "Freezes the values of KSP Diag - Part Flex, as its Freeze the values box does, or lets them follow " +
+            "the physics again; frozen, the drawing stays as last measured. Returns frozen.")]
         internal static object Freeze(bool frozen)
         {
             KSPDiagPartFlex mod = Mod();
